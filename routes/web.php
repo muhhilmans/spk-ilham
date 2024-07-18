@@ -7,6 +7,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('students', StudentController::class)->except(['show', 'create', 'edit']);
     Route::resource('criterias', CriteriaController::class)->except(['show', 'create', 'edit']);
     Route::resource('grades', GradeController::class)->except(['show', 'create', 'edit']);
+    Route::get('/results', [ResultController::class, 'index'])->name('results.index');
 });

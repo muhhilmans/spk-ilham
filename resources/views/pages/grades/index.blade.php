@@ -27,7 +27,7 @@
     @endif
 
     @if ($criterias->count() > 0)
-        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 px-2">
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
             @foreach ($criterias as $criteria)
                 <div class="col">
                     <div class="card">
