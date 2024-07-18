@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Criteria;
+use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GradeController extends Controller
 {
@@ -18,9 +20,12 @@ class GradeController extends Controller
         $criterias = Criteria::all();
         $students = Student::all();
 
+        $grades = Grade::with('student', 'criteria')->get();
+
         return view('pages.grades.index', [
             'criterias' => $criterias,
-            'students' => $students
+            'students' => $students,
+            'grades' => $grades
         ]);
     }
 
@@ -32,7 +37,37 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'student_id' => 'required',
+            'grade' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->grade > 85) {
+            $score = 5;
+            $comment = "Sangat Baik";
+        } elseif ($request->grade > 75) {
+            $score = 3;
+            $comment = "Cukup";
+        } else {
+            $score = 2;
+            $comment = "Kurang";
+        }
+
+        Grade::create([
+            'student_id' => $request->student_id,
+            'criteria_id' => $request->criteria_id,
+            'grade' => $request->grade,
+            'score' => $score,
+            'comment' => $comment
+        ]);
+
+        return redirect()->route('grades.index')->with('success', 'Penilaian berhasil ditambahkan!');
     }
 
     /**
@@ -42,9 +77,36 @@ class GradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Grade $grade)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'grade' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->grade > 85) {
+            $score = 5;
+            $comment = "Sangat Baik";
+        } elseif ($request->grade > 75) {
+            $score = 3;
+            $comment = "Cukup";
+        } else {
+            $score = 2;
+            $comment = "Kurang";
+        }
+
+        $grade->grade = $request->grade;
+        $grade->score = $score;
+        $grade->comment = $comment;
+
+        $grade->save();
+
+        return redirect()->route('grades.index')->with('success', 'Penilaian berhasil diperbarui!');
     }
 
     /**
@@ -53,8 +115,12 @@ class GradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Grade $grade)
     {
-        //
+        $grade = Grade::findOrFail($request->grade_id);
+
+        $grade->delete();
+
+        return redirect()->route('grades.index')->with('success', 'Penilaian berhasil dihapus!');
     }
 }

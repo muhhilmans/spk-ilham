@@ -26,64 +26,83 @@
         </div>
     @endif
 
-    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
-        @foreach ($criterias as $criteria)
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title m-0 me-2"><strong>{{ $criteria->name }}</strong></h5>
-                            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal"
-                                data-bs-target="#createModal{{ $criteria->id }}"><i class="bx bx-plus"></i> Tambah</button>
-                            @include('pages.grades.partials.create')
+    @if ($criterias->count() > 0)
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 px-2">
+            @foreach ($criterias as $criteria)
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title m-0 me-2"><strong>{{ $criteria->name }}</strong></h5>
+                                <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#createModal{{ $criteria->id }}"><i class="bx bx-plus"></i>
+                                    Tambah</button>
+                                @include('pages.grades.partials.create')
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive text-nowrap">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>#</th>
-                                        <th>Nama Siswa</th>
-                                        <th>Keterangan</th>
-                                        <th>Nilai</th>
-                                        <th>Bobot</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                {{-- <tbody class="table-border-bottom-0">
-                                    @if ($students->count() > 0)
-                                        @foreach ($students as $student)
-                                            <tr class="text-center">
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td class="text-start"><strong>{{ $student->name }}</strong></td>
-                                                <td>{{ $student->class }}</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-center gap-2 text-start">
-                                                        <button class="btn btn-warning" type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#editModal{{ $student->id }}"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</button>
-                                                        @include('pages.students.partials.edit')
-                                                        <button class="btn btn-danger" type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal{{ $student->id }}"><i
-                                                                class="bx bx-trash me-1"></i>
-                                                            Delete</button>
-                                                        @include('pages.students.partials.delete')
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="4" class="text-center"><strong>Belum Ada Data</strong></td>
+                        <div class="card-body">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Keterangan</th>
+                                            <th>Nilai</th>
+                                            <th>Bobot</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    @endif
-                                </tbody> --}}
-                            </table>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                        @php
+                                            $hasData = false;
+                                            $iteration = 1;
+                                        @endphp
+                                    
+                                        @foreach ($grades as $grade)
+                                            @if ($grade->criteria_id == $criteria->id)
+                                                @php
+                                                    $hasData = true;
+                                                @endphp
+                                                <tr class="text-center">
+                                                    <td>{{ $iteration++ }}</td>
+                                                    <td class="text-start"><strong>{{ $grade->student->name }}</strong></td>
+                                                    <td>{{ $grade->comment }}</td>
+                                                    <td>{{ $grade->grade }}</td>
+                                                    <td>{{ $grade->score }}</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-center gap-2 text-start">
+                                                            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#editModal{{ $grade->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
+                                                            @include('pages.grades.partials.edit')
+                                                            <button class="btn btn-danger" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#deleteModal{{ $grade->id }}"><i class="bx bx-trash me-1"></i> Delete</button>
+                                                            @include('pages.grades.partials.delete')
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    
+                                        @if (!$hasData)
+                                            <tr>
+                                                <td colspan="6" class="text-center"><strong>Belum Ada Data</strong></td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+            @endforeach
+        </div>
+    @else
+        <div class="row px-3">
+            <div class="card">
+                <h4 class="text-center pt-4 pb-2"><strong>Belum Ada Data Kriteria</strong></h4>
             </div>
-        @endforeach
-    </div>
+        </div>
+    @endif
 @endsection

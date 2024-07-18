@@ -8,10 +8,11 @@
             <form action="{{ route('grades.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
+                    <input type="text" name="criteria_id" value="{{ $criteria->id }}" hidden>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="name" class="form-label">Siswa <span class="text-danger">*</span></label>
-                            <select name="class" id="class" class="form-select" required>
+                            <label for="student_id" class="form-label">Siswa <span class="text-danger">*</span></label>
+                            <select name="student_id" id="student_id" class="form-select" required>
                                 <option disabled selected>Pilih Siswa</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }} - Kelas {{ $student->class }}</option>
