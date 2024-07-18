@@ -2,23 +2,73 @@
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">Kelola Users</h4>
-    <div class="card px-3 py-4">
-        {{ $dataTable->table(['class' => 'table table-sm table-bordered display responsive nowrap', 'width' => '100%']) }}
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session('status'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            {{ session('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    
+    <div class="card px-3 py-2">
+        <div class="card-header">
+            <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#createModal"><i
+                    class="bx bx-plus"></i> Tambah</button>
+            @include('pages.users.partials.create')
+        </div>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @foreach ($users as $user)
+                            <tr class="text-center">
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-start"><strong>{{ $user->name }}</strong></td>
+                                <td>{{ $user->email }}</td>
+                                </td>
+                                <td>
+                                    {{ $user->username }}
+                                    {{-- <span class="badge bg-label-primary me-1">Active</span> --}}
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center gap-2">
+                                        <a class="btn btn-warning" href="javascript:void(0);"><i
+                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="btn btn-danger" href="javascript:void(0);"><i
+                                                class="bx bx-trash me-1"></i>
+                                            Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection
-
-@push('custom-styles')
-    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" rel="stylesheet">
-@endpush
-
-@push('custom-scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-@endpush
