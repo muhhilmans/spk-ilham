@@ -36,8 +36,8 @@
                 </li>
             </ul>
         </li> --}}
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ Route::is('grades.*') ? 'active' : '' }}">
+            <a href="{{ route('grades.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-edit"></i>
                 <div data-i18n="Basic">Penilaian</div>
             </a>
@@ -50,13 +50,13 @@
         </li>
         <!-- Master -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
-        <li class="menu-item {{ Route::is('criterias.*') ? 'active' : '' }}"">
+        <li class="menu-item {{ Route::is('criterias.*') ? 'active' : '' }}">
             <a href="{{ route('criterias.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cabinet"></i>
                 <div data-i18n="Basic">Kriteria</div>
             </a>
         </li>
-        <li class="menu-item {{ Route::is('students.*') ? 'active' : '' }}"">
+        <li class="menu-item {{ Route::is('students.*') ? 'active' : '' }}">
             <a href="{{ route('students.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-id-card"></i>
                 <div data-i18n="Basic">Siswa</div>

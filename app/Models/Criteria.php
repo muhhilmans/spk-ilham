@@ -13,4 +13,9 @@ class Criteria extends Model
         'name',
         'score',
     ];
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
+    }
 }
