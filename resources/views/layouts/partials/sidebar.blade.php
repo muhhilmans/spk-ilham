@@ -50,8 +50,8 @@
         </li>
         <!-- Master -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ Route::is('students.*') ? 'active' : '' }}"">
+            <a href="{{ route('students.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-id-card"></i>
                 <div data-i18n="Basic">Siswa</div>
             </a>
