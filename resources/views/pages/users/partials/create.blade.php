@@ -10,26 +10,26 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <label for="name" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
                             <input type="text" id="name" name="name" class="form-control"
                                 placeholder="Masukkan Nama Lengkap" required />
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="text" id="email" name="email" class="form-control"
                                 placeholder="xxxx@xxx.xx" required />
                         </div>
                         <div class="col mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" id="username" name="username" class="form-control" placeholder="xxxx"
                                 min="4" required />
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-0 form-password-toggle">
-                            <label class="form-label" for="password">Password</label>
+                            <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <input type="password" id="password" class="form-control" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col mb-0 form-password-toggle">
-                            <label class="form-label" for="password_confirmation">Konfirmasi Password</label>
+                            <label class="form-label" for="password_confirmation">Konfirmasi Password <span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <input type="password" id="password_confirmation" class="form-control" name="password_confirmation"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Close
+                        Batal
                     </button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

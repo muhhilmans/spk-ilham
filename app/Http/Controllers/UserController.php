@@ -67,29 +67,7 @@ class UserController extends Controller
         ]);
 
         // Redirect ke halaman daftar user dengan pesan sukses
-        return redirect()->route('users.index')->with('status', 'User berhasil ditambahkan!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
     }
 
     /**
@@ -99,9 +77,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+        ]);
+
+        // Jika validasi gagal, kembalikan dengan pesan error
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        // Jika validasi berhasil, update data di database
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+
+        $user->save();
+
+        // Redirect ke halaman daftar user dengan pesan sukses
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui!');
     }
 
     /**
@@ -110,8 +109,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, User $user)
     {
-        //
+         // Pastikan user yang akan dihapus benar-benar ada
+         $user = User::findOrFail($request->user_id);
+
+         // Hapus user
+         $user->delete();
+ 
+         // Redirect ke halaman daftar user dengan pesan sukses
+         return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
     }
 }

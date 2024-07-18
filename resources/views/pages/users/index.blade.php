@@ -13,9 +13,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    @if (session('status'))
+    @if (session('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
-            {{ session('status') }}
+            {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -25,7 +25,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    
+
     <div class="card px-3 py-2">
         <div class="card-header">
             <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#createModal"><i
@@ -56,12 +56,15 @@
                                     {{-- <span class="badge bg-label-primary me-1">Active</span> --}}
                                 </td>
                                 <td>
-                                    <div class="d-flex align-items-center justify-content-center gap-2">
-                                        <a class="btn btn-warning" href="javascript:void(0);"><i
-                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                        <a class="btn btn-danger" href="javascript:void(0);"><i
+                                    <div class="d-flex align-items-center justify-content-center gap-2 text-start">
+                                        <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#editModal{{ $user->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
+                                        @include('pages.users.partials.edit')
+                                        <button class="btn btn-danger" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ $user->id }}"><i
                                                 class="bx bx-trash me-1"></i>
-                                            Delete</a>
+                                            Delete</button>
+                                            @include('pages.users.partials.delete')
                                     </div>
                                 </td>
                             </tr>
