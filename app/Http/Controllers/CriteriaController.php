@@ -15,7 +15,8 @@ class CriteriaController extends Controller
      */
     public function index()
     {
-        $criterias = Criteria::paginate(10);
+        // $criterias = Criteria::paginate(10);
+        $criterias = Criteria::all();
 
         return view('pages.criterias.index', [
             'criterias' => $criterias

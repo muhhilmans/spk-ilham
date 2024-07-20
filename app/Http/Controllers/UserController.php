@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         // return $dataTable->render('pages.users.index');
-        $users = User::paginate(10);
+        // $users = User::paginate(10);
+        $users = User::all();
 
         return view('pages.users.index', [
             'users' => $users,
