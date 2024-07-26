@@ -10,12 +10,17 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'user_id',
         'class',
     ];
 
     public function grades()
     {
         return $this->hasMany(Grade::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

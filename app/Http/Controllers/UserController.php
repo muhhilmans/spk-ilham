@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\DataTables\UserDataTable;
+use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -37,7 +38,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data input
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -57,6 +57,10 @@ class UserController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
+        ]);
+
+        Student::create([
+            'user_id' => $user->id
         ]);
 
         $role = Role::findById($request->role);

@@ -60,7 +60,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            // 'name' => 'required|string|max:255',
             'class' => 'required|string|max:255',
         ]);
 
@@ -70,7 +70,7 @@ class StudentController extends Controller
                 ->withInput();
         }
 
-        $student->name = $request->name;
+        // $student->name = $request->name;
         $student->class = $request->class;
 
         $student->save();

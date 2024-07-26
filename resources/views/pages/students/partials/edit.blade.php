@@ -11,17 +11,24 @@
                 <div class="modal-body">
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="name" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                            <label for="name" class="form-label">Nama Lengkap <span
+                                    class="text-danger">*</span></label>
                             <input type="text" id="name" name="name" class="form-control"
-                                placeholder="Masukkan Nama Lengkap Siswa" value="{{ $student->name }}" required />
+                                placeholder="Masukkan Nama Lengkap Siswa" value="{{ $student->user->name }}" required
+                                disabled />
+                            <input type="text" id="user_id" name="user_id" class="form-control"
+                                value="{{ $student->user_id }}" hidden>
                         </div>
                         <div class="col mb-3">
                             <label for="class" class="form-label">Kelas <span class="text-danger">*</span></label>
                             <select name="class" id="class" class="form-select" required>
                                 <option disabled selected>Pilih Kelas Siswa</option>
-                                <option value="10" {{ old('class', $student->class) == '10' ? 'selected' : '' }}>10</option>
-                                <option value="11" {{ old('class', $student->class) == '11' ? 'selected' : '' }}>11</option>
-                                <option value="12" {{ old('class', $student->class) == '12' ? 'selected' : '' }}>12</option>
+                                <option value="10" {{ old('class', $student->class) == '10' ? 'selected' : '' }}>10
+                                </option>
+                                <option value="11" {{ old('class', $student->class) == '11' ? 'selected' : '' }}>11
+                                </option>
+                                <option value="12" {{ old('class', $student->class) == '12' ? 'selected' : '' }}>12
+                                </option>
                             </select>
                         </div>
                     </div>

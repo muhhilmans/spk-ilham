@@ -13,7 +13,7 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="student_id" class="form-label">Siswa <span class="text-danger">*</span></label>
-                            <input type="text" id="student_id" name="student_id" class="form-control" value="{{ $grade->student->name }}" disabled>
+                            <input type="text" id="student_id" name="student_id" class="form-control" value="{{ $grade->student->user->name }}" disabled>
                         </div>
                         <div class="col mb-3">
                             <label for="grade" class="form-label">Nilai <span class="text-danger">*</span></label>

@@ -56,7 +56,7 @@
                                 @foreach ($studentsInClass as $student)
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td class="text-start"><strong>{{ $student->name }}</strong></td>
+                                        <td class="text-start"><strong>{{ $student->user->name }}</strong></td>
                                         @php
                                             $total = 0;
                                         @endphp
@@ -105,7 +105,7 @@
 
                         if ($total > $highestTotal) {
                             $highestTotal = $total;
-                            $studentAchievment = $student->name;
+                            $studentAchievment = $student->user->name;
                             $description = "Siswa yang berprestasi yakni <strong>{$studentAchievment}</strong> dengan total nilai <strong>{$highestTotal}</strong> di Kelas {$class}";
                         }
                     }

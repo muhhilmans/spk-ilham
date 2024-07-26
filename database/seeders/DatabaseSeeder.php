@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -47,5 +48,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $student->assignRole('siswa');
+        
+        DB::table('students')->insert([
+            'user_id' => $student->id,
+        ]);
     }
 }

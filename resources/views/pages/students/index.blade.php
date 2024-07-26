@@ -27,11 +27,11 @@
     @endif
 
     <div class="card px-3 py-2">
-        <div class="card-header">
+        {{-- <div class="card-header">
             <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#createModal"><i
                     class="bx bx-plus"></i> Tambah</button>
             @include('pages.students.partials.create')
-        </div>
+        </div> --}}
         <div class="card-body">
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped">
@@ -48,19 +48,19 @@
                             @foreach ($students as $student)
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td class="text-start"><strong>{{ $student->name }}</strong></td>
-                                    <td>{{ $student->class }}</td>
+                                    <td class="text-start"><strong>{{ $student->user->name }}</strong></td>
+                                    <td>{{ $student->class ?? 'Kelas belum diatur' }}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-center gap-2 text-start">
                                             <button class="btn btn-warning" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#editModal{{ $student->id }}"><i
                                                     class="bx bx-edit-alt me-1"></i> Edit</button>
                                             @include('pages.students.partials.edit')
-                                            <button class="btn btn-danger" type="button" data-bs-toggle="modal"
+                                            {{-- <button class="btn btn-danger" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{ $student->id }}"><i
                                                     class="bx bx-trash me-1"></i>
                                                 Delete</button>
-                                            @include('pages.students.partials.delete')
+                                            @include('pages.students.partials.delete') --}}
                                         </div>
                                     </td>
                                 </tr>

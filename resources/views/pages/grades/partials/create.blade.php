@@ -15,7 +15,7 @@
                             <select name="student_id" id="student_id" class="form-select" required>
                                 <option disabled selected>Pilih Siswa</option>
                                 @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->name }} - Kelas {{ $student->class }}</option>
+                                    <option value="{{ $student->id }}">{{ $student->user->name }} - Kelas {{ $student->class }}</option>
                                 @endforeach
                             </select>
                         </div>

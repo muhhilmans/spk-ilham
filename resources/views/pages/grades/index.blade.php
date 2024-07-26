@@ -66,7 +66,7 @@
                                                 @endphp
                                                 <tr class="text-center">
                                                     <td>{{ $iteration++ }}</td>
-                                                    <td class="text-start"><strong>{{ $grade->student->name }}</strong></td>
+                                                    <td class="text-start"><strong>{{ $grade->student->user->name }}</strong></td>
                                                     <td>{{ $grade->comment }}</td>
                                                     <td>{{ $grade->grade }}</td>
                                                     <td>{{ $grade->score }}</td>
