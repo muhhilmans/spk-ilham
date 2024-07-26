@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResultController;
+use Maatwebsite\Excel\Row;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,13 @@ Route::middleware('guest')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('users', UserController::class)->except(['show', 'create', 'edit']);
-    Route::resource('students', StudentController::class)->except(['show', 'create', 'edit']);
-    Route::resource('criterias', CriteriaController::class)->except(['show', 'create', 'edit']);
-    Route::resource('grades', GradeController::class)->except(['show', 'create', 'edit']);
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::resource('users', UserController::class)->except(['show', 'create', 'edit']);
+        Route::resource('students', StudentController::class)->except(['show', 'create', 'edit']);
+        Route::resource('criterias', CriteriaController::class)->except(['show', 'create', 'edit']);
+    });
+    Route::group(['middleware' => ['role:admin|guru']], function () {
+        Route::resource('grades', GradeController::class)->except(['show', 'create', 'edit']);
+    });
     Route::get('/results', [ResultController::class, 'index'])->name('results.index');
 });

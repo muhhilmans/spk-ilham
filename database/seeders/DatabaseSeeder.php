@@ -17,11 +17,35 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        User::create([
+        $this->call([
+            RoleSeeder::class,
+        ]);
+
+        $admin = User::create([
            'name' => 'Admin',
            'username' => 'admin',
            'email' => 'admin@example.com',
            'password' => bcrypt('password'),
         ]);
+
+        $admin->assignRole('admin');
+
+        $teacher = User::create([
+            'name' => 'Guru',
+            'username' => 'guru',
+            'email' => 'guru@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $teacher->assignRole('guru');
+
+        $student = User::create([
+            'name' => 'Siswa',
+            'username' => 'siswa',
+            'email' => 'siswa@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $student->assignRole('siswa');
     }
 }

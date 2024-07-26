@@ -36,37 +36,43 @@
                 </li>
             </ul>
         </li> --}}
-        <li class="menu-item {{ Route::is('grades.*') ? 'active' : '' }}">
-            <a href="{{ route('grades.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-edit"></i>
-                <div data-i18n="Basic">Penilaian</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Route::is('results.*') ? 'active' : '' }}">
-            <a href="{{ route('results.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Basic">Hasil</div>
-            </a>
-        </li>
+        @hasrole('admin|guru')
+            <li class="menu-item {{ Route::is('grades.*') ? 'active' : '' }}">
+                <a href="{{ route('grades.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-edit"></i>
+                    <div data-i18n="Basic">Penilaian</div>
+                </a>
+            </li>
+        @endhasrole
+        @hasrole('admin|guru|siswa')
+            <li class="menu-item {{ Route::is('results.*') ? 'active' : '' }}">
+                <a href="{{ route('results.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Basic">Hasil</div>
+                </a>
+            </li>
+        @endhasrole
         <!-- Master -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
-        <li class="menu-item {{ Route::is('criterias.*') ? 'active' : '' }}">
-            <a href="{{ route('criterias.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cabinet"></i>
-                <div data-i18n="Basic">Kriteria</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Route::is('students.*') ? 'active' : '' }}">
-            <a href="{{ route('students.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-id-card"></i>
-                <div data-i18n="Basic">Siswa</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Route::is('users.*') ? 'active' : '' }}">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Basic">Users</div>
-            </a>
-        </li>
+        @hasrole('admin')
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
+            <li class="menu-item {{ Route::is('criterias.*') ? 'active' : '' }}">
+                <a href="{{ route('criterias.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cabinet"></i>
+                    <div data-i18n="Basic">Kriteria</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Route::is('students.*') ? 'active' : '' }}">
+                <a href="{{ route('students.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-id-card"></i>
+                    <div data-i18n="Basic">Siswa</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Route::is('users.*') ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div data-i18n="Basic">Users</div>
+                </a>
+            </li>
+        @endhasrole
     </ul>
 </aside>

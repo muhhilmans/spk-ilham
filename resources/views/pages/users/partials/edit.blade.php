@@ -9,11 +9,20 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row g-2">
                         <div class="col mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
                             <input type="text" id="name" name="name" class="form-control"
                                 placeholder="Masukkan Nama Lengkap" value="{{ $user->name }}" required />
+                        </div>
+                        <div class="col mb-3">
+                            <label for="role" class="form-label">Roles <span class="text-danger">*</span></label>
+                            <select name="role" id="role" class="form-select" required>
+                                <option disabled selected>Pilih Roles...</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" {{ $role->id == $user->roles[0]->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row g-2">

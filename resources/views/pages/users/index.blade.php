@@ -41,6 +41,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Username</th>
+                            <th>Roles</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@
                                     {{ $user->username }}
                                     {{-- <span class="badge bg-label-primary me-1">Active</span> --}}
                                 </td>
+                                <td><span class="badge bg-label-primary me-1">{{ $user->roles->implode('name', ', ') }}</span></td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center gap-2 text-start">
                                         <button class="btn btn-warning" type="button" data-bs-toggle="modal"
