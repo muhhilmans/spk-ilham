@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grade extends Model
+class Prestation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'student_id',
-        'criteria_id',
-        'grade',
-        'score',
-        'comment',
+        'branch',
+        'level',
+        'file',
     ];
 
     public function student()
@@ -22,13 +21,8 @@ class Grade extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function criteria()
+    public function grade()
     {
-        return $this->belongsTo(Criteria::class);
-    }
-
-    public function prestations()
-    {
-        return $this->hasMany(Prestation::class);
+        return $this->belongsTo(Grade::class);
     }
 }

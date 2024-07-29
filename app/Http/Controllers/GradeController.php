@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\Student;
 use App\Models\Criteria;
-use App\Models\Grade;
+use App\Models\Prestation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,13 +20,15 @@ class GradeController extends Controller
     {
         $criterias = Criteria::all();
         $students = Student::all();
+        $prestations = Prestation::all();
 
         $grades = Grade::with('student', 'criteria')->get();
 
         return view('pages.grades.index', [
             'criterias' => $criterias,
             'students' => $students,
-            'grades' => $grades
+            'grades' => $grades,
+            'prestations' => $prestations
         ]);
     }
 

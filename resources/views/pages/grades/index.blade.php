@@ -34,10 +34,12 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title m-0 me-2"><strong>{{ $criteria->name }}</strong></h5>
-                                <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#createModal{{ $criteria->id }}"><i class="bx bx-plus"></i>
-                                    Tambah</button>
-                                @include('pages.grades.partials.create')
+                                @if ($criteria->name != 'Prestasi')
+                                    <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#createModal{{ $criteria->id }}"><i class="bx bx-plus"></i>
+                                        Tambah</button>
+                                    @include('pages.grades.partials.create')
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">
@@ -45,12 +47,21 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
+                                            @if ($criteria->name == 'Prestasi')
+                                            <th>#</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Cabang Perlombaan</th>
+                                            <th>Tingkat</th>
+                                            <th>Bukti</th>
+                                            <th>Bobot</th>
+                                            @else
                                             <th>#</th>
                                             <th>Nama Siswa</th>
                                             <th>Keterangan</th>
                                             <th>Nilai</th>
                                             <th>Bobot</th>
                                             <th>Aksi</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
@@ -65,21 +76,48 @@
                                                     $hasData = true;
                                                 @endphp
                                                 <tr class="text-center">
-                                                    <td>{{ $iteration++ }}</td>
-                                                    <td class="text-start"><strong>{{ $grade->student->user->name }}</strong></td>
-                                                    <td>{{ $grade->comment }}</td>
-                                                    <td>{{ $grade->grade }}</td>
-                                                    <td>{{ $grade->score }}</td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center gap-2 text-start">
-                                                            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#editModal{{ $grade->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
-                                                            @include('pages.grades.partials.edit')
-                                                            <button class="btn btn-danger" type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteModal{{ $grade->id }}"><i class="bx bx-trash me-1"></i> Delete</button>
-                                                            @include('pages.grades.partials.delete')
-                                                        </div>
-                                                    </td>
+                                                    @if ($grade->criteria->name == 'Prestasi')
+                                                        @foreach ($prestations as $prestation)
+                                                            @if ($prestation->student_id == $grade->student_id)
+                                                                <td>{{ $iteration++ }}</td>
+                                                                <td class="text-start">
+                                                                    <strong>{{ $prestation->student->user->name }}</strong>
+                                                                </td>
+                                                                <td>{{ $prestation->branch }}</td>
+                                                                <td>{{ $prestation->level }}</td>
+                                                                <td>
+                                                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center justify-content-center">
+                                                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                                                            class="avatar avatar-lg pull-up" title="{{ $prestation->file }}">
+                                                                            <img src="{{ route('prestations.image', $prestation->file) }}"
+                                                                                alt="{{ $prestation->file }}" class="rounded-circle" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td>{{ $grade->score }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        <td>{{ $iteration++ }}</td>
+                                                        <td class="text-start">
+                                                            <strong>{{ $grade->student->user->name }}</strong>
+                                                        </td>
+                                                        <td>{{ $grade->comment }}</td>
+                                                        <td>{{ $grade->grade }}</td>
+                                                        <td>{{ $grade->score }}</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center justify-content-center gap-2 text-start">
+                                                                <button class="btn btn-warning" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#editModal{{ $grade->id }}"><i
+                                                                        class="bx bx-edit-alt me-1"></i> Edit</button>
+                                                                @include('pages.grades.partials.edit')
+                                                                <button class="btn btn-danger" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#deleteModal{{ $grade->id }}"><i
+                                                                        class="bx bx-trash me-1"></i> Delete</button>
+                                                                @include('pages.grades.partials.delete')
+                                                            </div>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -91,6 +129,7 @@
                                         @endif
                                     </tbody>
                                     
+
                                 </table>
                             </div>
                         </div>

@@ -11,8 +11,20 @@ class ResultController extends Controller
 {
     public function index()
     {
-        $students = Student::with('grades.criteria')->get();
+        $user = auth()->user()->hasRole('siswa');
         $criterias = Criteria::all();
+
+        if ($user) {
+            $student = Student::where('user_id', auth()->user()->id)->first();
+            $grades = Grade::where('student_id', $student->id)->get();
+
+            return view('pages.results.index', [
+                'grades' => $grades,
+                'criterias' => $criterias
+            ]);
+        }
+
+        $students = Student::with('grades.criteria')->get();
 
         return view('pages.results.index', [
             'students' => $students,

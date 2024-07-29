@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
+            CriteriaSeeder::class,
         ]);
 
         $admin = User::create([

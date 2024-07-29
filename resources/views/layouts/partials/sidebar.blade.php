@@ -44,6 +44,14 @@
                 </a>
             </li>
         @endhasrole
+        @hasrole('siswa')
+            <li class="menu-item {{ Route::is('prestations.*') ? 'active' : '' }}">
+                <a href="{{ route('prestations.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-trophy"></i>
+                    <div data-i18n="Basic">Prestasi</div>
+                </a>
+            </li>
+        @endhasrole
         @hasrole('admin|guru|siswa')
             <li class="menu-item {{ Route::is('results.*') ? 'active' : '' }}">
                 <a href="{{ route('results.index') }}" class="menu-link">
