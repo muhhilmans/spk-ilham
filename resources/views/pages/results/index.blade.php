@@ -107,7 +107,7 @@
 
     @hasrole('siswa')
     <div class="row px-3 py-2">
-        <div class="card col-12 col-md-6 col-lg-4">
+        <div class="card col-12 col-md-8">
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped">
                     <thead>

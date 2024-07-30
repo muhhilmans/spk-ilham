@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrestationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use Maatwebsite\Excel\Row;
 
@@ -51,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => ['role:siswa']], function () {
         Route::resource('prestations', PrestationController::class)->except(['show', 'create', 'edit']);
+        Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
 
     Route::get('/images/prestations/{filename}', [DashboardController::class, 'getPrestation'])->name('prestations.image');

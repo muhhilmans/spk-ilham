@@ -32,6 +32,18 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="nis" class="form-label">NIS <span class="text-danger">*</span></label>
+                            <input type="number" id="nis" name="nis" class="form-control"
+                                placeholder="Masukkan NIS Siswa" value="{{ $student->nis }}" maxlength="16" required />
+                        </div>
+                        <div class="col mb-3">
+                            <label for="nisn" class="form-label">NISN <span class="text-danger">*</span></label>
+                            <input type="number" id="nisn" name="nisn" class="form-control"
+                                placeholder="Masukkan NISN Siswa" value="{{ $student->nisn }}" maxlength="10" required />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

@@ -34,6 +34,8 @@ class StudentController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'class' => 'required|string|max:255',
+            'nis' => 'required|string|max:255',
+            'nisn' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -45,6 +47,8 @@ class StudentController extends Controller
         Student::create([
             'name' => $request->name,
             'class' => $request->class,
+            'nis' => $request->nis,
+            'nisn' => $request->nisn,
         ]);
 
         return redirect()->route('students.index')->with('success', 'Siswa berhasil ditambahkan!');
@@ -62,6 +66,8 @@ class StudentController extends Controller
         $validator = Validator::make($request->all(), [
             // 'name' => 'required|string|max:255',
             'class' => 'required|string|max:255',
+            'nis' => 'required|string|max:255',
+            'nisn' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -72,6 +78,8 @@ class StudentController extends Controller
 
         // $student->name = $request->name;
         $student->class = $request->class;
+        $student->nis = $request->nis;
+        $student->nisn = $request->nisn;
 
         $student->save();
 

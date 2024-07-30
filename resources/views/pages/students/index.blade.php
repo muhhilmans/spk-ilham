@@ -39,6 +39,8 @@
                         <tr class="text-center">
                             <th>#</th>
                             <th>Nama Siswa</th>
+                            <th>NIS</th>
+                            <th>NISN</th>
                             <th>Kelas</th>
                             <th>Aksi</th>
                         </tr>
@@ -49,6 +51,8 @@
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="text-start"><strong>{{ $student->user->name }}</strong></td>
+                                    <td>{{ $student->nis ?? 'NIS belum diatur' }}</td>
+                                    <td>{{ $student->nisn ?? 'NISN belum diatur' }}</td>
                                     <td>{{ $student->class ?? 'Kelas belum diatur' }}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-center gap-2 text-start">

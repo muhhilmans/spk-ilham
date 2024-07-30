@@ -16,6 +16,8 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('nis')->nullable();
+            $table->string('nisn')->nullable();
             $table->string('class')->nullable();
             $table->timestamps();
         });
