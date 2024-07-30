@@ -23,7 +23,7 @@
                             <select name="level" id="level" class="form-select" required>
                                 <option disabled selected>Pilih Tingkat</option>
                                 <option value="Nasional" {{ $prestation->level == 'Nasional' ? 'selected' : '' }}>
-                                    Tingkat Nasional</option>
+                                    Tingkat Nasional/Internasional</option>
                                 <option value="Provinsi" {{ $prestation->level == 'Provinsi' ? 'selected' : '' }}>
                                     Tingkat Provinsi</option>
                                 <option value="Kabupaten" {{ $prestation->level == 'Kabupaten' ? 'selected' : '' }}>

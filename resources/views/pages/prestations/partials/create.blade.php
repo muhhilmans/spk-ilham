@@ -19,7 +19,7 @@
                             <label for="level" class="form-label">Tingkat <span class="text-danger">*</span></label>
                             <select name="level" id="level" class="form-select" required>
                                 <option disabled selected>Pilih Tingkat</option>
-                                <option value="Nasional">Tingkat Nasional</option>
+                                <option value="Nasional">Tingkat Nasional/Internasional</option>
                                 <option value="Provinsi">Tingkat Provinsi</option>
                                 <option value="Kabupaten">Tingkat Kabupaten</option>
                             </select>

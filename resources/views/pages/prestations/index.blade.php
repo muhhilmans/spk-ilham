@@ -52,7 +52,7 @@
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="text-start"><strong>{{ $prestation->branch }}</strong></td>
-                                    <td>Tingkat {{ $prestation->level }}</td>
+                                    <td>{{ $prestation->level == 'Nasional' ? 'Nasional/Internasional' : $prestation->level  }}</td>
                                     <td>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center justify-content-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
