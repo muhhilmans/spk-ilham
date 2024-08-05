@@ -47,6 +47,7 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
+                    @hasrole('siswa')
                     <li>
                         <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class="bx bx-user me-2"></i>
@@ -56,6 +57,7 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
+                    @endhasrole
                     <li>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
